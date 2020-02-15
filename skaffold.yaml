@@ -4,12 +4,12 @@ metadata:
   name: spring-boot-microservice
 build:
   artifacts:
-  - image: sivakumarsagar/micro-service
+  - image: kaji80docker/micro-service
 deploy:
   helm:
     releases:
     - name: micro-service-devops
       chartPath: micro-service
       values:
-        image: sivakumarsagar/micro-service
+        image: kaji80docker/micro-service
 
