@@ -56,7 +56,6 @@
 		    <groupId>io.micrometer</groupId>
 		    <artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
-		<dependencies>
 	        <dependency>
 	          <groupId>com.example.projects</groupId>
 	          <artifactId>documentedprojectdependency</artifactId>
