@@ -39,6 +39,14 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependencies>
+                    <dependency>
+                    <groupId>com.example.projects</groupId>
+                    <artifactId>documentedprojectdependency</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                    <type>war</type>
+                    <scope>runtime</scope>
+                </dependency>
 	        <!-- Spring boot actuator to expose metrics endpoint -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
