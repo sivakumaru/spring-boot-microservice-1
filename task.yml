@@ -1,0 +1,77 @@
+---
+- name: Install Microservices
+  hosts: web1
+  become: true
+  # handler:
+  # - name: Redeploying application
+  #   shell: sudo rm -rf /opt/tomcat/webapps/demoapp-0.0.1-SNAPSHOT.war
+  tasks:
+    - name: install java 8
+      apt:
+        name: openjdk-8-jdk
+        state: present
+    - name: install maven and other packages
+      apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
+      with_items:
+        - maven
+    - name: verify maven version
+      shell: sudo apt-get install -y maven
+      shell: mvn --version
+    - name: git clone
+      shell:  /home/ubuntu/git.sh
+      # - name: git clone
+      # git:
+      #  repo: http://github.com/sivakumaru/spring-boot-microservice.git
+      #  dest: /home/ubuntu/testcode
+      #  version: master
+    - name: excute maven run command
+      shell: mvn clean install -f /home/ubuntu/testcode/pom.xml
+      # - name: run the microservice
+      # shell: nohup java -jar /home/ubuntu/testcode/target/demoapp-0.0.1-SNAPSHOT.jar &
+    - name: add tomcat group
+      group:
+        name: tomcat
+
+    - name: add tomcat user
+      user:
+        name: tomcat
+        group: tomcat
+        home: /user/share/tomcat
+        createhome: no
+
+    - name: create /opt/tomcat directory
+      file:
+        path: /opt/tomcat
+        state: directory
+        mode: 0755
+    - name: download & unarchive
+      unarchive:
+        src: http://apachemirror.wuchna.com/tomcat/tomcat-9/v9.0.37/bin/apache-tomcat-9.0.37.tar.gz
+        dest: /opt/tomcat
+        remote_src: yes
+        extra_opts: [--strip-components=1]
+    - name: Change ownership
+      file:
+        path: /opt/tomcat
+        owner: tomcat
+        group: tomcat
+        mode: "u+rwx,g+rx,o=rx"
+        recurse: yes
+        state: directory
+
+    - name: Copy Tomcat service from local to remote
+      copy:
+        src: tomcat.service
+        dest: /etc/systemd/system/
+        mode: 0755
+
+    - name: Start and enable Tomcat service
+      systemd:
+        name: tomcat
+        state: started
+        enabled: true
+        daemon_reload: true
+    - name: deploying into tomcat
+      shell: /home/ubuntu/deploy.sh
+    - name: post build
+      shell: /home/ubuntu/postbuild.sh
