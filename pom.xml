@@ -60,9 +60,10 @@
 				    <configuration>
 					<url>http://localhost:8080/manager/text</url>
 					<server>TomcatServer</server>
-					<path>/myapp</path>
+					<path>/demoapp-0.0.1-SNAPSHOT</path>
 				    </configuration>
 			</plugin>
+			
 			
 		</plugins>
 		
