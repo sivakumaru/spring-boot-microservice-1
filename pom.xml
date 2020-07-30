@@ -62,7 +62,7 @@
 				    <server>my-tomcat</server>
 				    <path>/myapp</path>
 				</configuration>
-           		</plugin>
+			</plugin>
         </plugins>
 		</plugins>
 	</build>
