@@ -1,0 +1,14 @@
+apiVersion: skaffold/v1
+kind: Config
+metadata:
+  name: spring-boot-microservice--
+build:
+  artifacts:
+  - image: sivakumarsagar/springbootexample
+deploy:
+  helm:
+    releases:
+    - name: micro-service-devops
+      chartPath: micro-service
+      values:
+        image: sivakumarsagar/springbootexample
