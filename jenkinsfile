@@ -1,0 +1,7 @@
+#excute shell
+docker login -u sivakumarsagar -p Sivakumar@9
+export CLOUDSDK_CONFIG=$JENKINS_HOME
+gcloud version
+gcloud container clusters get-credentials cluster-3 --zone us-central1-c --project k8s-demo-267015
+skaffold run 
+helm upgrade micro-service-devops ./micro-service
