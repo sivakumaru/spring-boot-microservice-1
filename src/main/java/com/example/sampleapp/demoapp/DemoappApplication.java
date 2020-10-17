@@ -37,7 +37,7 @@ public class DemoappApplication {
         return "Hello from  Devops Server with Param : " + paramId + "\n";
         }
 	@RequestMapping(value = "/parse", method = RequestMethod.GET)
-        public String getDevops() {
+        public String getParse() {
         return "Hello from parse Server" + "\n";
         }
 
