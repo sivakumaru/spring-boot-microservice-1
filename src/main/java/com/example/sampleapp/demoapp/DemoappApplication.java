@@ -36,5 +36,9 @@ public class DemoappApplication {
         System.out.print("id is " + paramId);
         return "Hello from  Devops Server with Param : " + paramId + "\n";
         }
+	@RequestMapping(value = "/parse", method = RequestMethod.GET)
+        public String getDevops() {
+        return "Hello from parse Server" + "\n";
+        }
 
 }
